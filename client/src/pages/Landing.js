@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import api from '../api';
 
 const Landing = () => {
   const [city, setCity] = useState('');
@@ -27,8 +28,8 @@ const Landing = () => {
     // Debounce the API call to reduce requests
     window.autocompleteTimeout = setTimeout(async () => {
       try {
-        const res = await fetch(`/api/utility/autocomplete?input=${encodeURIComponent(value)}`);
-        const data = await res.json();
+        const res = await api.get(`/api/utility/autocomplete?input=${encodeURIComponent(value)}`);
+        const data = res.data;
         console.log('Autocomplete API response:', data);
         if (data.status === 'OK') {
           setCitySuggestions(data.predictions.map(pred => pred.description));
@@ -54,13 +55,13 @@ const Landing = () => {
     setCitySuggestions([]);
     try {
       // Geocode the city to get lat/lng (via backend proxy)
-      const geoRes = await fetch(`/api/utility/geocode?address=${encodeURIComponent(city)}`);
-      const geoData = await geoRes.json();
+      const geoRes = await api.get(`/api/utility/geocode?address=${encodeURIComponent(city)}`);
+      const geoData = geoRes.data;
       if (!geoData.results || !geoData.results.length) throw new Error('City not found');
       const { lat, lng } = geoData.results[0].geometry.location;
       // Search for 7-Eleven nearby (via backend proxy)
-      const placesRes = await fetch(`/api/utility/nearby?lat=${lat}&lng=${lng}`);
-      const placesData = await placesRes.json();
+      const placesRes = await api.get(`/api/utility/nearby?lat=${lat}&lng=${lng}`);
+      const placesData = placesRes.data;
       if (!placesData.results || !placesData.results.length) throw new Error('No 7-Eleven found near this city');
       const place = placesData.results[0];
       setResult({
