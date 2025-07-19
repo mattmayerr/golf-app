@@ -1,0 +1,566 @@
+body {
+  margin: 0;
+  font-family: 'Merriweather', 'Georgia', 'Times New Roman', Times, serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f8f9fa;
+  color: #333;
+  background: linear-gradient(rgba(34, 49, 63, 0.55), rgba(34, 49, 63, 0.55)), url('./golf-course-bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Mobile-friendly container */
+.dashboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* Responsive navigation */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+nav a, nav button {
+  color: white;
+  text-decoration: none;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+  font-weight: 500;
+}
+
+nav a:hover, nav button:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+/* Mobile-optimized form */
+.score-entry-form {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.score-entry-form input,
+.score-entry-form button {
+  font-size: 16px; /* Prevents zoom on iOS */
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  margin: 0.5rem 0;
+  transition: border-color 0.2s;
+  color: #000;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.score-entry-form input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1), 0 2px 4px rgba(0,0,0,0.1);
+  background: white;
+  color: #000 !important;
+}
+
+.score-entry-form button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 44px; /* iOS touch target minimum */
+}
+
+.score-entry-form button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.score-entry-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Make all labels white */
+label {
+  color: white !important;
+  font-weight: 600;
+}
+
+/* Ensure input text is black */
+input, select, textarea {
+  color: #000 !important;
+}
+
+/* Mobile-optimized score grid */
+.scores-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.scores-grid input,
+.scores-grid select {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  min-height: 50px;
+  color: #000;
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.scores-grid select {
+  cursor: pointer;
+}
+
+/* Mobile-friendly score history */
+.score-history {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  color: #333;
+}
+
+.score-history h3 {
+  margin-top: 0;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+/* Filter section */
+.filters-section {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.filters-section input {
+  width: 100%;
+  max-width: 200px;
+  color: #000;
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 8px 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.filters-section label {
+  color: white;
+  font-weight: 600;
+}
+
+/* Round cards */
+.round-card {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+  color: #333;
+}
+
+.round-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.round-card strong {
+  color: #333;
+}
+
+.round-card span {
+  color: #555;
+}
+
+/* Delete button */
+.delete-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  min-height: 44px;
+  min-width: 44px;
+  transition: background-color 0.2s;
+}
+
+.delete-btn:hover {
+  background: #c82333;
+}
+
+/* Auth forms */
+.auth-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  color: #333;
+}
+
+.auth-container h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.auth-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-container form > div {
+  width: 100%;
+}
+
+.auth-container input,
+.auth-container button {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  max-width: 320px;
+  width: 100%;
+}
+
+.auth-container input {
+  width: 100%;
+  margin-bottom: 1rem;
+  font-size: 16px;
+  color: #000;
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.auth-container button {
+  width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 44px;
+}
+
+.auth-container label {
+  color: white;
+  font-weight: 600;
+}
+
+/* Landing page */
+.landing-container {
+  text-align: center;
+  padding: 2rem 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.landing-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #fff;
+  /* Remove or override any gradient or text fill for solid white */
+}
+
+.landing-container p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.landing-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.landing-buttons a {
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s;
+  width: auto;
+  margin: 0 auto;
+  justify-content: center;
+  text-align: center;
+}
+
+.landing-buttons a:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  color: white;
+}
+
+/* Error and success messages */
+.error {
+  color: #721c24;
+  background: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 0.75rem;
+  border-radius: 6px;
+  margin: 0.5rem 0;
+  font-weight: 500;
+}
+
+.success {
+  color: #155724;
+  background: #d4edda;
+  border: 1px solid #c3e6cb;
+  padding: 0.75rem;
+  border-radius: 6px;
+  margin: 0.5rem 0;
+  font-weight: 500;
+}
+
+/* Mobile responsive breakpoints */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 0.5rem;
+  }
+  
+  .score-entry-form,
+  .score-history,
+  .auth-container {
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+  
+  .scores-grid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.25rem;
+  }
+  
+  .scores-grid input,
+  .scores-grid select {
+    font-size: 16px;
+    min-height: 44px;
+  }
+  
+  .landing-container {
+    padding: 1rem 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .landing-container h1 {
+    font-size: 2rem;
+    text-align: center;
+  }
+  
+  .landing-container p {
+    text-align: center;
+    padding: 0 1rem;
+  }
+  
+  .landing-buttons {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .landing-buttons a {
+    width: auto;
+    margin: 0 auto;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  nav {
+    padding: 0.75rem;
+  }
+  
+  nav a, nav button {
+    padding: 0.5rem 0.75rem;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing-container {
+    padding: 0.5rem;
+  }
+  
+  .landing-container h1 {
+    font-size: 1.8rem;
+  }
+  
+  .landing-container p {
+    font-size: 1rem;
+    padding: 0 0.5rem;
+  }
+  
+  .landing-buttons {
+    max-width: 250px;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .scores-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .round-card {
+    padding: 1rem;
+  }
+  
+  .filters-section {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .filters-section input {
+    max-width: 100%;
+  }
+}
+
+/* iOS-specific optimizations */
+@supports (-webkit-touch-callout: none) {
+  /* iOS Safari specific styles */
+  input, button, select, textarea {
+    -webkit-appearance: none;
+    border-radius: 8px;
+  }
+  
+  /* Prevent zoom on input focus */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="date"],
+  select {
+    font-size: 16px;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+  }
+  
+  .score-entry-form,
+  .score-history,
+  .auth-container,
+  .round-card {
+    background: #2d2d2d;
+    color: #ffffff;
+  }
+  
+  .score-entry-form input,
+  .filters-section input,
+  .auth-container input,
+  .scores-grid input,
+  .scores-grid select {
+    background: #3d3d3d;
+    border-color: #4d4d4d;
+    color: #000 !important;
+  }
+  
+  .score-history h3,
+  .auth-container h2,
+  .round-card strong {
+    color: #ffffff;
+  }
+  
+  .round-card span {
+    color: #cccccc;
+  }
+  
+  .landing-container p {
+    color: #cccccc;
+  }
+  
+  .filters-section {
+    background: #2d2d2d;
+    color: #ffffff;
+  }
+  
+  .filters-section label {
+    color: #ffffff;
+  }
+  
+  label {
+    color: #ffffff !important;
+  }
+}
+
+.score-entry-form strong {
+  color: #000 !important;
+}
+
+.score-history strong::selection,
+.score-history ::selection {
+  color: #000 !important;
+  background: #b3d4fc !important;
+}
+
+.score-history *::selection {
+  color: #000 !important;
+  background: #b3d4fc !important;
+}
